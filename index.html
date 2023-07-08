@@ -1,168 +1,210 @@
 <!DOCTYPE html>
 <html lang="ru">
 
-  <head>
+<head>
 
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="pages/index.css">
-    <meta name="description" content="Яндекс.Практикум: Mesto">
-    <meta name="author" content="Георгий Агафонов">
-    <meta name="creator" content="Яндекс.Практикум">
-    <meta name="keywords" content="html, css, БЭМ, grid, JS">
-    <meta name="robots" content="noindex">
-    <title>Mesto</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="pages/index.css">
+  <meta name="description" content="Яндекс.Практикум: Mesto">
+  <meta name="author" content="Георгий Агафонов">
+  <meta name="creator" content="Яндекс.Практикум">
+  <meta name="keywords" content="html, css, БЭМ, grid, JS">
+  <meta name="robots" content="noindex">
+  <title>Mesto</title>
 
-  </head>
+</head>
 
-  <body class="root">
+<body class="root">
 
-    <div class="page">
+  <div class="page">
 
-      <header class="header">
+    <header class="header">
 
-        <img src="./images/header-logo.svg" alt="Логотип" class="header__logo">
+      <img src="./images/header-logo.svg" alt="Логотип" class="header__logo">
 
-      </header>
+    </header>
 
+    <main class="content">
 
-      <main class="content">
+      <section class="profile">
 
-        <section class="profile">
+        <div class="profile__avatar">
+          <img src="./images/image-jack-iv.jpg" alt="Фотография Жак-Ива Кусто" class="profile__avatar-image">
+        </div>
 
-          <div class="profile__avatar">
-            <img src="./images/image-jack-iv.jpg" alt="Фотография Жак-Ива Кусто" class="profile__avatar-image">
-          </div>
+        <div class="profile__info">
+          <h2 class="profile__name">Жак-Ив Кусто</h2>
+          <p class="profile__job">Исследователь океана</p>
+        </div>
 
-          <div class="profile__info">
-            <h2 class="profile__title">Жак-Ив Кусто</h2>
-            <p class="profile__subtitle">Исследователь океана</p>          
-          </div>
+        <button type="button" class="profile__button profile__button_type_edit"></button>
 
-          <button type="button" class="profile__button profile__button_type_edit"></button>
+        <button type="button" class="profile__button profile__button_type_add"></button>
 
-          <button type="button" class="profile__button profile__button_type_add"></button>
+      </section>
 
-        </section>
+      <section class="elements" aria-label="Фотографии пользователя">
 
+        <div class="cards">
 
-        <section class="elements" aria-label="Фотографии пользователя">
-          
-          <div class="cards">
+          <div class="card">
 
-            <div class="card">
+            <img src="./images/wexor-tmg-L-2p8fapOA8-unsplash-2.jpg" alt="Черепаха" class="card__image">
 
-              <img src="#" alt="#" class="card__image">
+            <div class="card__description">
 
-              <div class="card__description">
-                <h2 class="card__title">#</h2>
-                <div class="card__like">
-                  <button type="button" class="card__like-button" aria-label="Добавить в избранное"></button>
-                  <span class="card__like-count"></span>
-                </div>
-  
+              <h2 class="card__title">Черепаха</h2>
+
+              <div class="card__like">
+                <button type="button" class="card__like-button" aria-label="Добавить в избранное"></button>
+                <span class="card__like-count"></span>
               </div>
-              
-            </div>
 
-            <div class="card">
-
-              <img src="#" alt="#" class="card__image">
-              
-              <div class="card__description">
-                <h2 class="card__title">#</h2>
-                <div class="card__like">
-                  <button type="button" class="card__like-button" aria-label="Добавить в избранное"></button>
-                  <span class="card__like-count"></span>
-                </div>
-  
-              </div>
-              
-            </div>
-
-            <div class="card">
-
-              <img src="#" alt="#" class="card__image">
-              
-              <div class="card__description">
-                <h2 class="card__title">#</h2>
-                <div class="card__like">
-                  <button type="button" class="card__like-button" aria-label="Добавить в избранное"></button>
-                  <span class="card__like-count"></span>
-                </div>
-  
-              </div>
-              
-            </div>
-
-            <div class="card">
-
-              <img src="#" alt="#" class="card__image">
-              
-              <div class="card__description">
-                <h2 class="card__title">#</h2>
-                <div class="card__like">
-                  <button type="button" class="card__like-button" aria-label="Добавить в избранное"></button>
-                  <span class="card__like-count"></span>
-                </div>
-  
-              </div>
-              
-            </div>
-
-            <div class="card">
-
-              <img src="#" alt="#" class="card__image">
-              
-              <div class="card__description">
-                <h2 class="card__title">#</h2>
-                <div class="card__like">
-                  <button type="button" class="card__like-button" aria-label="Добавить в избранное"></button>
-                  <span class="card__like-count"></span>
-                </div>
-  
-              </div>
-              
-            </div>
-
-            <div class="card">
-
-              <img src="#" alt="#" class="card__image">
-              
-              <div class="card__description">
-                <h2 class="card__title">#</h2>
-                <div class="card__like">
-                  <button type="button" class="card__like-button" aria-label="Добавить в избранное"></button>
-                  <span class="card__like-count"></span>
-                </div>
-  
-              </div>
-              
             </div>
 
           </div>
-        
-        </section>
 
-        <!-- here will be popup -->
-  
-      </main>
+          <div class="card">
 
+            <img src="./images/jakub-dziubak-Ta5II09WSrA-unsplash-2.jpg" alt="Океан с рыбами" class="card__image">
 
-      <footer class="footer">
-        <p class="footer__copyright">&copy; 2023 Георгий Агафонов</p>
-      </footer>
+            <div class="card__description">
 
+              <h2 class="card__title">Толща воды, кишащая рыбами</h2>
+
+              <div class="card__like">
+                <button type="button" class="card__like-button" aria-label="Добавить в избранное"></button>
+                <span class="card__like-count"></span>
+              </div>
+
+            </div>
+
+          </div>
+
+          <div class="card">
+
+            <img src="./images/karl-fredrickson-xFVazdd9oEg-unsplash-2.jpg" alt="Прилив" class="card__image">
+
+            <div class="card__description">
+
+              <h2 class="card__title">Прилив</h2>
+
+              <div class="card__like">
+                <button type="button" class="card__like-button" aria-label="Добавить в избранное"></button>
+                <span class="card__like-count"></span>
+              </div>
+
+            </div>
+
+          </div>
+
+          <div class="card">
+
+            <img src="./images/toa-heftiba-jwraMZtxBHs-unsplash-2.jpg" alt="Тупорылая акула" class="card__image">
+
+            <div class="card__description">
+              <h2 class="card__title">Тупорылая акула</h2>
+              <div class="card__like">
+                <button type="button" class="card__like-button" aria-label="Добавить в избранное"></button>
+                <span class="card__like-count"></span>
+              </div>
+
+            </div>
+
+          </div>
+
+          <div class="card">
+
+            <img src="./images/praveen-thotagamuwa-jEqyV_rumuU-unsplash-2.jpg" alt="Медузы" class="card__image">
+
+            <div class="card__description">
+              <h2 class="card__title">Медузы</h2>
+              <div class="card__like">
+                <button type="button" class="card__like-button" aria-label="Добавить в избранное"></button>
+                <span class="card__like-count"></span>
+              </div>
+
+            </div>
+
+          </div>
+
+          <div class="card">
+
+            <img src="./images/marek-okon-tWWCqIMiUmg-unsplash-2.jpg" alt="Подводные растения" class="card__image">
+
+            <div class="card__description">
+              <h2 class="card__title">Кораллы?</h2>
+              <div class="card__like">
+                <button type="button" class="card__like-button" aria-label="Добавить в избранное"></button>
+                <span class="card__like-count"></span>
+              </div>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </section>
+
+      <!-- here will be popup -->
+
+    </main>
+
+    <footer class="footer">
+      <p class="footer__copyright">&copy; 2023 Георгий Агафонов</p>
+    </footer>
+
+  </div>
+
+  <!-- Popup: редактировать профиль -->
+
+  <!-- <div class="popup popup_type_edit-profile">
+
+    <div class="popup__container content__element">
+
+      <h2 class="popup__title">Редактировать профиль</h2>
+
+      <form class="popup__form" name="profileEditPopupForm" novalidate>
+        <label class="popup__field">
+          <input type="text" class="popup__input popup__input_type_name" placeholder="Жак-Ив Кусто" name="name" id="name-input" minlength="2" maxlength="40" required>
+          <span class="popup__input-error name-input-error"></span>
+        </label>
+
+        <label class="popup__field">
+          <input type="text" class="popup__input popup__input_type_job" id="job-input" placeholder="Исследователь океана" name="job" minlength="2" maxlength="200" required>
+          <span class="popup__input-error job-input-error"></span>
+        </label>
+
+        <button class="popup__save-button" type="submit">Сохранить</button>
+      </form>
+      <button class="popup__cancel-button" type="button" aria-label="Закрыть окно"></button>
     </div>
+  </div> -->
 
-    <section class="popup">
-      <div class="popup__container">
-        <img src="./images/close_btn.svg" alt="" class="popup__close">
-        <h2 class="popup__title"></h2>
-        <p class="popup__text">
-        </p>
-      </div>
-    </section>
+  <div class="popup">
+    <div class="popup__container content__element">
+      <h2 class="popup__title">Редактировать профиль</h2>
+      <form class="popup__form" name="popupForm">
+        <input
+        type="text"
+        class="popup__input popup__input_type_name"
+        placeholder="Имя"
+        name="name" autocomplete="off">
+        <input
+        type="text"
+        class="popup__input popup__input_type_job"
+        placeholder="Профессия"
+        name="job" autocomplete="off">
+        <button class="popup__save-button" type="submit">Сохранить</button>
+      </form>
+      <button class="popup__cancel-button" type="button" aria-label="Закрыть окно"></button>
+    </div>
+  </div>
+</div>
 
-  </body>
+  <script src="./scripts/index.js"></script>
+
+</body>
 </html>
