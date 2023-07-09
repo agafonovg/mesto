@@ -5,7 +5,7 @@
 
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="pages/index.css">
+  <link rel="stylesheet" href="./pages/index.css">
   <meta name="description" content="Яндекс.Практикум: Mesto">
   <meta name="author" content="Георгий Агафонов">
   <meta name="creator" content="Яндекс.Практикум">
@@ -27,22 +27,25 @@
 
     <main class="content">
 
+
       <section class="profile">
 
-        <div class="profile__avatar">
-          <img src="./images/image-jack-iv.jpg" alt="Фотография Жак-Ива Кусто" class="profile__avatar-image">
-        </div>
+        <img src="./images/photo_2022-12-25 01.16.39.jpeg" alt="Фотография пользователя" class="profile__avatar">
 
         <div class="profile__info">
-          <h2 class="profile__name">Жак-Ив Кусто</h2>
-          <p class="profile__job">Исследователь океана</p>
-        </div>
 
-        <button type="button" class="profile__button profile__button_type_edit"></button>
+          <div class="profile__name-block">
+            <h1 class="profile__name">Георгий Агафонов</h1>
+            <button type="button" class="profile__button profile__button_type_edit" aria-label="Редактировать профиль"></button>
+          </div>
+
+          <p class="profile__job">PjM, Timeweb</p>
+        </div>
 
         <button type="button" class="profile__button profile__button_type_add"></button>
 
       </section>
+
 
       <section class="elements" aria-label="Фотографии пользователя">
 
@@ -158,53 +161,20 @@
 
   </div>
 
-  <!-- Popup: редактировать профиль -->
-
-  <!-- <div class="popup popup_type_edit-profile">
-
-    <div class="popup__container content__element">
-
-      <h2 class="popup__title">Редактировать профиль</h2>
-
-      <form class="popup__form" name="profileEditPopupForm" novalidate>
-        <label class="popup__field">
-          <input type="text" class="popup__input popup__input_type_name" placeholder="Жак-Ив Кусто" name="name" id="name-input" minlength="2" maxlength="40" required>
-          <span class="popup__input-error name-input-error"></span>
-        </label>
-
-        <label class="popup__field">
-          <input type="text" class="popup__input popup__input_type_job" id="job-input" placeholder="Исследователь океана" name="job" minlength="2" maxlength="200" required>
-          <span class="popup__input-error job-input-error"></span>
-        </label>
-
-        <button class="popup__save-button" type="submit">Сохранить</button>
-      </form>
-      <button class="popup__cancel-button" type="button" aria-label="Закрыть окно"></button>
-    </div>
-  </div> -->
-
   <div class="popup">
     <div class="popup__container content__element">
       <h2 class="popup__title">Редактировать профиль</h2>
       <form class="popup__form" name="popupForm">
-        <input
-        type="text"
-        class="popup__input popup__input_type_name"
-        placeholder="Имя"
-        name="name" autocomplete="off">
-        <input
-        type="text"
-        class="popup__input popup__input_type_job"
-        placeholder="Профессия"
-        name="job" autocomplete="off">
+        <input type="text" class="popup__input popup__input_type_name" placeholder="Имя" name="name" autocomplete="off">
+        <input type="text" class="popup__input popup__input_type_job" placeholder="Профессия" name="job" autocomplete="off">
         <button class="popup__save-button" type="submit">Сохранить</button>
       </form>
       <button class="popup__cancel-button" type="button" aria-label="Закрыть окно"></button>
     </div>
   </div>
-</div>
 
   <script src="./scripts/index.js"></script>
 
 </body>
+
 </html>
