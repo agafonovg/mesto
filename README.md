@@ -7,7 +7,7 @@
 
 * [Ссылка на макет в Figma](https://www.figma.com/file/2cn9N9jSkmxD84oJik7xL7/JavaScript.-Sprint-4?node-id=0%3A1)
 
-## Первыйпроект с использванием JavaScript
+## Первый проект с использванием JavaScript
 
 На даном этапе работы реализовано открытие поп-апа с изменением данных профиля.
 
