@@ -9,12 +9,14 @@
   -webkit-text-size-adjust: 100%;
   -ms-text-size-adjust: 100%;
   -moz-text-size-adjust: 100%;
-  margin-left: auto;
-  margin-right: auto;
-  width: calc(100% - 2 * 200px); /* Поля 200px */
+
+  /* margin-left: auto;
+  margin-right: auto; */
+  width: 100%;
+  /* width: calc(100% - 2 * 200px); */
 }
 
-@media screen and (max-width: 1024px) {
+/* @media screen and (max-width: 1024px) {
   .root  {
     width: calc(100% - 2 * 72px);
   }
@@ -30,4 +32,4 @@
   .root  {
     width: calc(100% - 2 * 19px);
   }
-}
+} */

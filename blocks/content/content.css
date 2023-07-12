@@ -1,5 +1,7 @@
 @media screen and (max-width: 425px) {
   .content {
-    margin: auto;
+    /* display: grid; */
+    /* min-width: 320px; */
+    /* margin: auto; */
   }
 }
