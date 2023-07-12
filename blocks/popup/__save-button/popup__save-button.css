@@ -12,6 +12,7 @@
   line-height: 1.22;
   text-align: center;
   color: #FFFFFF;
+  /* Анимация при наведении */
   transition: opacity .2s;
 }
 

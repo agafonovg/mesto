@@ -2,7 +2,6 @@
   width: 24px;
   height: 24px;
   background-image: url(../../../../images/icon-button-edit.svg);
-  /* background-size: 42% 42%; */
 }
 
 @media screen and (max-width: 425px) {

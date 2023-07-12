@@ -2,7 +2,6 @@
 <html lang="ru">
 
 <head>
-
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="./pages/index.css">
@@ -13,41 +12,31 @@
   <meta name="keywords" content="html, css, БЭМ, grid, JS">
   <meta name="robots" content="noindex">
   <title>Mesto</title>
-
 </head>
 
-<body class="root">
+<body class="page">
+  <div class="content">
 
-  <div class="page">
-
-    <header class="header">
-
-      <img src="./images/header-logo.svg" alt="Логотип" class="header__logo">
-
+    <header class="header content__element content__element_type_header">
+      <img src="./images/header-logo.svg" alt="Сервис Место-Россия. Логотип" class="header__logo">
     </header>
 
-    <main class="content">
+    <main>
 
-      <section class="profile">
-
+      <section class="profile content__element">
         <img src="./images/my-avatar.jpeg" alt="Фотография пользователя" class="profile__avatar">
-
         <div class="profile__info">
-
           <div class="profile__name-block">
             <h1 class="profile__name">Георгий Агафонов</h1>
             <button type="button" class="profile__button profile__button_type_edit" aria-label="Редактировать профиль"></button>
           </div>
-
-          <p class="profile__job">PjM, Timeweb</p>
+          <p class="profile__job"> PjM, TimeWeb</p>
         </div>
-
-        <button type="button" class="profile__button profile__button_type_add"></button>
-
+        <button type="button" class="profile__button profile__button_type_add" aria-label="Добавить фотографию"></button>
       </section>
 
-      <section class="cards" aria-label="Фото">
-
+      <section class="cards content__element" aria-label="Фото">
+    
         <div class="card">
 
           <img src="./images/wexor-tmg-L-2p8fapOA8-unsplash-2.jpg" alt="Черепаха" class="card__image">
@@ -126,33 +115,29 @@
             <button type="button" class="card__like-button" aria-label="Добавить в избранное"></button>
 
           </div>
-
-        </div>
-
+        
+       
       </section>
-
     </main>
 
-    <footer class="footer">
-      <p class="footer__copyright">&copy; 2023 Георгий Агафонов</p>
+    <footer class="footer content__element">
+      <p class="footer__copyright">&copy;&nbsp;2023 Георгий Агафонов</p>
     </footer>
 
-  </div>
-
-  <div class="popup">
-    <div class="popup__container">
-      <h2 class="popup__title">Редактировать профиль</h2>
-      <form class="popup__form" name="popupForm">
-        <input type="text" class="popup__input popup__input_type_name" placeholder="Имя" name="name" autocomplete="off">
-        <input type="text" class="popup__input popup__input_type_job" placeholder="Профессия" name="job" autocomplete="off">
-        <button class="popup__save-button" type="submit">Сохранить</button>
-      </form>
-      <button class="popup__cancel-button" type="button" aria-label="Закрыть окно"></button>
+    <div class="popup">
+      <div class="popup__container content__element">
+        <h2 class="popup__title">Редактировать профиль</h2>
+        <form class="popup__form" name="popupForm">
+          <input type="text" class="popup__input popup__input_type_name" placeholder="Имя" name="name">
+          <input type="text" class="popup__input popup__input_type_job" placeholder="Профессия" name="job">
+          <button class="popup__save-button" type="submit">Сохранить</button>
+        </form>
+        <button class="popup__cancel-button" type="button" aria-label="Закрыть окно"></button>
+      </div>
     </div>
   </div>
 
   <script src="./scripts/index.js"></script>
-
 </body>
 
 </html>
