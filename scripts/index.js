@@ -76,36 +76,39 @@ function renderCards (container, ...cards) {
   return card;
 }
 
+/* Отображение карточек при загрузке страницы */
+renderCards(cardsContainer, ...initialCards);
+
 /* Функция нажатия на лайк */
-function likeCard (event) {
+function likeCard(event) {
   event.target.closest('.card__like-button').classList.toggle('card__like-button_active');
 }
 
 /* Функция удаления карточки при нажатии на кнопку */
-function deleteCard (event) {
+function deleteCard(event) {
   event.target.closest('.card').remove();
 }
 
 /* Функция открывает нужный попап */
-function openPopup (popup) {
-  popup.classList.add('popup_opened');
+function openPopup(popupElement) {
+  popupElement.classList.add('popup_opened');
 }
 
 /* Функция закрывает текущий попап */
-function closePopup (event) {
-  event.target.closest('.popup').classList.remove('popup_opened');
+function closePopup(popupElement) {
+  popupElement.classList.remove('popup_opened');
 }
 
 /* Функция сохраняет введенные данные и закрывает попап */
-function saveProfileInfo (event) {
+function saveProfileInfo(event) {
   event.preventDefault();
   profileName.textContent = profileNameInput.value;
   profileJob.textContent = profileJobInput.value;
-  closePopup (event);
+  closePopup(profileEditPopup);
 }
 
 /* Функция сохраняет введенные данные и закрывает попап */
-function saveNewCard (event) {
+function saveNewCard(event) {
   event.preventDefault();
 
   const card = {
@@ -114,12 +117,12 @@ function saveNewCard (event) {
   };
 
   renderCards(cardsContainer, card);
-  closePopup(event);
+  closePopup(newCardPopup);
   newCardForm.reset();
 }
 
 /* Функция открывает попап с увеличенной картинкой */
-function showImagePopup (event) {
+function showImagePopup(event) {
   imagePopupFigure.src = event.target.src;
   imagePopupFigure.alt = event.target.alt;
   imagePopupCaption.textContent = event.target.closest('.card').querySelector('.card__title').textContent;
@@ -128,11 +131,13 @@ function showImagePopup (event) {
 }
 
 /* Обработчки событий */
+
 profileEditButton.addEventListener('click', function () {
   profileNameInput.value = profileName.textContent;
   profileJobInput.value = profileJob.textContent;
   openPopup(profileEditPopup);
 });
+
 profileEditForm.addEventListener('submit', saveProfileInfo);
 
 newCardButton.addEventListener('click', function () {
@@ -140,7 +145,17 @@ newCardButton.addEventListener('click', function () {
 });
 newCardForm.addEventListener('submit', saveNewCard);
 
-popupCloseButtons.forEach( button => button.addEventListener('click', closePopup) );
+popupCloseButtons.forEach(button => button.addEventListener('click', function() {
+  closePopup(button.closest('.popup'));
+}));
 
-/* Отображение карточек при загрузке страницы */
-renderCards(cardsContainer, ...initialCards);
+/* Escape */
+
+document.addEventListener('keydown', function(event) {
+  if (event.key === 'Escape') {
+    const popupToClose = document.querySelector('.popup_opened');
+    if (popupToClose) {
+      closePopup(popupToClose);
+    }
+  }
+});
