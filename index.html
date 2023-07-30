@@ -37,76 +37,40 @@
         <button type="button" class="profile__button profile__button_type_add" aria-label="Добавить фотографию"></button>
       </section>
 
-      <section class="cards content__element" aria-label="Фото">
+      <!-- Cards -->
 
-        <div class="card">
+      <section class="cards content__element" aria-label="Фотографии">
 
-          <img src="./images/wexor-tmg-L-2p8fapOA8-unsplash-2.jpg" alt="Черепаха" class="card__image">
+        <!-- Шаблон карточки для генерации -->
+        <template id="card">
 
-          <div class="card__description">
-            <h2 class="card__title">Черепаха</h2>
-            <button type="button" class="card__like-button" aria-label="Добавить в избранное"></button>
-          </div>
-        </div>
+          <div class="card">
 
-        <div class="card">
+            <img src="#" alt="#" class="card__image">
 
-          <img src="./images/jakub-dziubak-Ta5II09WSrA-unsplash-2.jpg" alt="Океан с рыбами" class="card__image">
+            <div class="card__description">
+              <h2 class="card__title">#</h2>
+              <button type="button" class="card__like-button" aria-label="Добавить в избранное"></button>
+            </div>
 
-          <div class="card__description">
-            <h2 class="card__title">Толща воды</h2>
-            <button type="button" class="card__like-button" aria-label="Добавить в избранное"></button>
-          </div>
-        </div>
-
-        <div class="card">
-
-          <img src="./images/karl-fredrickson-xFVazdd9oEg-unsplash-2.jpg" alt="Прилив" class="card__image">
-
-          <div class="card__description">
-            <h2 class="card__title">Прилив</h2>
-            <button type="button" class="card__like-button" aria-label="Добавить в избранное"></button>
-          </div>
-        </div>
-
-        <div class="card">
-
-          <img src="./images/toa-heftiba-jwraMZtxBHs-unsplash-2.jpg" alt="Тупорылая акула" class="card__image">
-
-          <div class="card__description">
-            <h2 class="card__title">Тупорылая акула</h2>
-            <button type="button" class="card__like-button" aria-label="Добавить в избранное"></button>
+            <button type="button" class="card__delete-button" aria-label="Удалить"></button>
+            
           </div>
 
-        </div>
-
-        <div class="card">
-
-          <img src="./images/praveen-thotagamuwa-jEqyV_rumuU-unsplash-2.jpg" alt="Медузы" class="card__image">
-
-          <div class="card__description">
-            <h2 class="card__title">Медузы</h2>
-            <button type="button" class="card__like-button" aria-label="Добавить в избранное"></button>
-          </div>
-
-        </div>
-
-        <div class="card">
-          <img src="./images/marek-okon-tWWCqIMiUmg-unsplash-2.jpg" alt="Подводные растения" class="card__image">
-
-          <div class="card__description">
-            <h2 class="card__title">Кораллы?</h2>
-            <button type="button" class="card__like-button" aria-label="Добавить в избранное"></button>
-          </div>
-        </div>
+        </template>
       </section>
+
     </main>
 
     <footer class="footer content__element">
       <p class="footer__copyright">&copy;&nbsp;2023 Георгий Агафонов</p>
     </footer>
 
-    <div class="popup">
+    <!-- Popups -->
+
+    <!-- Edit profile -->
+
+    <div class="popup popup_type_edit-profile">
       <div class="popup__container content__element">
         <h2 class="popup__title">Редактировать профиль</h2>
         <form class="popup__form" name="popupForm">
@@ -117,9 +81,39 @@
         <button class="popup__cancel-button" type="button" aria-label="Закрыть окно"></button>
       </div>
     </div>
+
+    <!-- add new place -->
+    <div class="popup popup_type_add-card">
+
+      <div class="popup__container content__element">
+
+        <h2 class="popup__title">Новое место</h2>
+
+        <form class="popup__form" name="popupForm">
+          <input type="text" class="popup__input popup__input_type_title" placeholder="Название" name="title" required>
+          <input type="url" class="popup__input popup__input_type_link" placeholder="Ссылка на картинку" name="link" required>
+          <button class="popup__save-button" type="submit">Создать</button>
+        </form>
+
+        <button class="popup__cancel-button" type="button" aria-label="Закрыть окно"></button>
+
+      </div>
+    </div>
+
+    <!-- show image -->
+    <div class="popup popup_type_image">
+
+      <figure class="popup__image-container">
+        <img src="#" alt="#" class="popup__image">
+        <figcaption class="popup__image-caption">#</figcaption>
+        <button class="popup__cancel-button" type="button" aria-label="Закрыть окно"></button>
+      </figure>
+    </div>
+
   </div>
 
   <script src="./scripts/index.js"></script>
+
 </body>
 
 </html>
