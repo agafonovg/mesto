@@ -1,16 +1,15 @@
-/* Функция включает валидацию форм */
-
-/* Аргумент - объект с классами элементов формы, например:
-{
+/** Функция включает валидацию форм
+ *
+ * Аргумент - объект с классами элементов формы, например:
+ * {
   formSelector: '.popup__form',
   inputSelector: '.popup__input',
   submitButtonSelector: '.popup__button',
   inactiveButtonClass: 'popup__button_disabled',
   inputErrorClass: 'popup__input_type_error',
   errorClass: 'popup__error_visible'
-} */
-
-
+}
+ */
 function enableValidation (formClasses) {
   const formElements = Array.from(document.querySelectorAll(formClasses.formSelector));
   formElements.forEach( (formElement) => {

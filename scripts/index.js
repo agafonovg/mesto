@@ -1,4 +1,4 @@
-/* Карточки */
+/** Исходные карточки для загрузки */
 const initialCards = [
   {
     name: 'Отличие Agile от WF',
@@ -25,6 +25,7 @@ const initialCards = [
     link: 'https://webcatcher.ru/wp-content/uploads/2019/08/ris.-2-stadii-upravlenija-proektami.jpg'
   }
 ];
+
 
 /** Элементы страницы */
 const profileEditButton = document.querySelector('.profile__button_type_edit');
@@ -53,24 +54,36 @@ const popupCloseButtons = document.querySelectorAll('.popup__cancel-button');
 const popups = document.querySelectorAll('.popup');
 
 
-/* Функция добавляет карточку/карточки на страницу */
+/** Функция добавляет карточку/карточки на страницу
+ *
+ * Аргументы:
+ * - контейнер для вставки,
+ * - один или несколько объектов с карточкой (при вставке массива с объектами использовать spread-оператор, например: ...arrayOfObjects)
+ *
+ * Ожидаемый формат объекта карточки:
+ * {  name: Строка с именем объекта (заголовок карточки),
+ *    link: Строка с полным адресом изображения   }
+ *
+ * Шаблон карточки для генерации:
+ * блок <template id="cards">
+ */
 function renderCards (container, ...cards) {
   cards.forEach( card => {
     container.prepend( getNewCard(card.name, card.link) );
   });
 }
 
-/* Функция создает из шаблона элемент с новой карточкой и возвращает его */
+/** Функция создает из шаблона элемент с новой карточкой и возвращает его */
  function getNewCard (name, link) {
-  /* Создание элемента из шаблона */
+  // Создание элемента из шаблона
   const card = cardTemplate.querySelector('.card').cloneNode(true);
 
-  /* Заполнение содержимого */
+  // Заполнение содержимого
   card.querySelector('.card__image').src = link;
   card.querySelector('.card__image').alt = name;
   card.querySelector('.card__title').textContent = name;
 
-  /* Обработчики нажатий */
+  // Обработчики нажатий
   card.querySelector('.card__image').addEventListener('click', showImagePopup);
   card.querySelector('.card__like-button').addEventListener('click', likeCard);
   card.querySelector('.card__delete-button').addEventListener('click', deleteCard);
@@ -78,39 +91,51 @@ function renderCards (container, ...cards) {
   return card;
 }
 
-/* Отображение карточек при загрузке страницы */
-renderCards(cardsContainer, ...initialCards);
-
-/* Функция нажатия на лайк */
-function likeCard(event) {
+/** Функция нажатия на лайк */
+function likeCard (event) {
   event.target.closest('.card__like-button').classList.toggle('card__like-button_active');
 }
 
-/* Функция удаления карточки при нажатии на кнопку */
-function deleteCard(event) {
+/** Функция удаления карточки при нажатии на кнопку */
+function deleteCard (event) {
   event.target.closest('.card').remove();
 }
 
-/* Функция открывает нужный попап */
-function openPopup(popupElement) {
-  popupElement.classList.add('popup_opened');
+/** Функция открывает нужный попап */
+function openPopup (popup) {
+  popup.classList.add('popup_opened');
+  document.addEventListener('keydown', closePopupByKey);
 }
 
-/* Функция закрывает текущий попап */
-function closePopup(popupElement) {
-  popupElement.classList.remove('popup_opened');
+/** Функция закрывает нужный попап */
+function closePopup (popup) {
+  const submitButtonElement = popup.querySelector('.popup__save-button');
+  popup.classList.remove('popup_opened');
+  document.removeEventListener('keydown', closePopupByKey);
+  if (submitButtonElement) {
+    submitButtonElement.classList.add('popup__save-button_disabled');
+    submitButtonElement.disabled = true;
+  }
 }
 
-/* Функция сохраняет введенные данные и закрывает попап */
-function saveProfileInfo(event) {
+/** Обработчик для закрытия попапов по кнопке Esc */
+function closePopupByKey (evt) {
+  if (evt.key === 'Escape') {
+    const popup = document.querySelector('.popup_opened');
+    closePopup(popup);
+  }
+}
+
+/** Функция сохраняет введенные данные и закрывает попап */
+function saveProfileInfo (event) {
   event.preventDefault();
   profileName.textContent = profileNameInput.value;
   profileJob.textContent = profileJobInput.value;
-  closePopup(profileEditPopup);
+  closePopup (profileEditPopup);
 }
 
-/* Функция сохраняет введенные данные и закрывает попап */
-function saveNewCard(event) {
+/** Функция сохраняет введенные данные и закрывает попап */
+function saveNewCard (event) {
   event.preventDefault();
 
   const card = {
@@ -123,8 +148,8 @@ function saveNewCard(event) {
   newCardForm.reset();
 }
 
-/* Функция открывает попап с увеличенной картинкой */
-function showImagePopup(event) {
+/** Функция открывает попап с увеличенной картинкой */
+function showImagePopup (event) {
   imagePopupFigure.src = event.target.src;
   imagePopupFigure.alt = event.target.alt;
   imagePopupCaption.textContent = event.target.closest('.card').querySelector('.card__title').textContent;
@@ -132,14 +157,15 @@ function showImagePopup(event) {
   openPopup(imagePopup);
 }
 
-/* Обработчки событий */
 
+/** Обработчки событий */
 profileEditButton.addEventListener('click', function () {
   profileNameInput.value = profileName.textContent;
+  profileNameInput.dispatchEvent(new Event('input'));
   profileJobInput.value = profileJob.textContent;
+  profileJobInput.dispatchEvent(new Event('input'));
   openPopup(profileEditPopup);
 });
-
 profileEditForm.addEventListener('submit', saveProfileInfo);
 
 newCardButton.addEventListener('click', function () {
@@ -147,17 +173,17 @@ newCardButton.addEventListener('click', function () {
 });
 newCardForm.addEventListener('submit', saveNewCard);
 
-popupCloseButtons.forEach(button => button.addEventListener('click', function() {
-  closePopup(button.closest('.popup'));
-}));
+popupCloseButtons.forEach( button => button.addEventListener('click', evt => {
+  const popup = evt.target.closest('.popup');
+  closePopup(popup);
+}) );
 
-/* Escape */
-
-document.addEventListener('keydown', function(event) {
-  if (event.key === 'Escape') {
-    const popupToClose = document.querySelector('.popup_opened');
-    if (popupToClose) {
-      closePopup(popupToClose);
-    }
-  }
+popups.forEach( popup => {
+  popup.addEventListener('mousedown', evt => {
+    if (evt.target === evt.currentTarget) closePopup(evt.target);
+  });
 });
+
+
+/** Отобразить исходные карточки при загрузке страницы */
+renderCards(cardsContainer, ...initialCards);
