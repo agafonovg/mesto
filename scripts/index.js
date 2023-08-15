@@ -26,6 +26,7 @@ const initialCards = [
   }
 ];
 
+/** Элементы страницы */
 const profileEditButton = document.querySelector('.profile__button_type_edit');
 const profileName = document.querySelector('.profile__name');
 const profileJob = document.querySelector('.profile__job');
@@ -49,6 +50,7 @@ const imagePopupFigure = imagePopup.querySelector('.popup__image');
 const imagePopupCaption = imagePopup.querySelector('.popup__image-caption');
 
 const popupCloseButtons = document.querySelectorAll('.popup__cancel-button');
+const popups = document.querySelectorAll('.popup');
 
 
 /* Функция добавляет карточку/карточки на страницу */
