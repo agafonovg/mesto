@@ -113,16 +113,42 @@ function openPopup (popup) {
   document.addEventListener('keydown', closePopupByKey);
 }
 
+// /** Функция закрывает нужный попап */
+// function closePopup (popup) {
+//   const submitButtonElement = popup.querySelector('.popup__save-button');
+//   popup.classList.remove('popup_opened');
+//   document.removeEventListener('keydown', closePopupByKey);
+//   if (submitButtonElement) {
+//     submitButtonElement.classList.add('popup__save-button_disabled');
+//     submitButtonElement.disabled = true;
+//   }
+// }
+
 /** Функция закрывает нужный попап */
-function closePopup (popup) {
+function closePopup(popup) {
   const submitButtonElement = popup.querySelector('.popup__save-button');
   popup.classList.remove('popup_opened');
   document.removeEventListener('keydown', closePopupByKey);
   if (submitButtonElement) {
-    submitButtonElement.classList.add('popup__save-button_disabled');
-    submitButtonElement.disabled = true;
+    disableSubmitButton(submitButtonElement, formClasses); // Используем новую функцию
   }
 }
+
+/* Функционал сброса состояния кнопки "Сохранить" при открытии попапа для добавления карточки*/
+newCardButton.addEventListener('click', function () {
+  openPopup(newCardPopup);
+
+  // Сброс значений полей формы
+  newCardForm.reset();
+
+  // Также сброс состояния кнопки сабмита
+  const submitButtonElement = newCardForm.querySelector('.popup__save-button');
+  if (submitButtonElement) {
+    disableSubmitButton(submitButtonElement, formClasses);
+  }
+});
+
+
 
 /** Обработчик для закрытия попапов по кнопке Esc */
 function closePopupByKey (evt) {
