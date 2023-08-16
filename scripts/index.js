@@ -111,27 +111,14 @@ function deleteCard (event) {
 function openPopup (popup) {
   popup.classList.add('popup_opened');
   document.addEventListener('keydown', closePopupByKey);
-}
 
-// /** Функция закрывает нужный попап */
-// function closePopup (popup) {
-//   const submitButtonElement = popup.querySelector('.popup__save-button');
-//   popup.classList.remove('popup_opened');
-//   document.removeEventListener('keydown', closePopupByKey);
-//   if (submitButtonElement) {
-//     submitButtonElement.classList.add('popup__save-button_disabled');
-//     submitButtonElement.disabled = true;
-//   }
-// }
+  disableSubmitButton(submitButtonElement, formClasses); 
+}
 
 /** Функция закрывает нужный попап */
 function closePopup(popup) {
-  const submitButtonElement = popup.querySelector('.popup__save-button');
   popup.classList.remove('popup_opened');
   document.removeEventListener('keydown', closePopupByKey);
-  if (submitButtonElement) {
-    disableSubmitButton(submitButtonElement, formClasses); // Используем новую функцию
-  }
 }
 
 /* Функционал сброса состояния кнопки "Сохранить" при открытии попапа для добавления карточки*/
@@ -140,15 +127,10 @@ newCardButton.addEventListener('click', function () {
 
   // Сброс значений полей формы
   newCardForm.reset();
-
-  // Также сброс состояния кнопки сабмита
-  const submitButtonElement = newCardForm.querySelector('.popup__save-button');
-  if (submitButtonElement) {
-    disableSubmitButton(submitButtonElement, formClasses);
-  }
 });
 
-
+/* Функция сброса состояния кнопки сабмита */
+const submitButtonElement = newCardForm.querySelector('.popup__save-button');
 
 /** Обработчик для закрытия попапов по кнопке Esc */
 function closePopupByKey (evt) {
