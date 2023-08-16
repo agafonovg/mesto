@@ -74,22 +74,28 @@ function renderCards (container, ...cards) {
 }
 
 /** Функция создает из шаблона элемент с новой карточкой и возвращает его */
- function getNewCard (name, link) {
+function getNewCard(name, link) {
   // Создание элемента из шаблона
   const card = cardTemplate.querySelector('.card').cloneNode(true);
 
+  const cardImage = card.querySelector('.card__image');
+  const cardTitle = card.querySelector('.card__title');
+  const likeButton = card.querySelector('.card__like-button');
+  const deleteButton = card.querySelector('.card__delete-button');
+
   // Заполнение содержимого
-  card.querySelector('.card__image').src = link;
-  card.querySelector('.card__image').alt = name;
-  card.querySelector('.card__title').textContent = name;
+  cardImage.src = link;
+  cardImage.alt = name;
+  cardTitle.textContent = name;
 
   // Обработчики нажатий
-  card.querySelector('.card__image').addEventListener('click', showImagePopup);
-  card.querySelector('.card__like-button').addEventListener('click', likeCard);
-  card.querySelector('.card__delete-button').addEventListener('click', deleteCard);
+  cardImage.addEventListener('click', showImagePopup);
+  likeButton.addEventListener('click', likeCard);
+  deleteButton.addEventListener('click', deleteCard);
 
   return card;
 }
+
 
 /** Функция нажатия на лайк */
 function likeCard (event) {
