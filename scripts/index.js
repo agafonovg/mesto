@@ -1,30 +1,6 @@
-/** Исходные карточки для загрузки */
-const initialCards = [
-  {
-    name: 'Отличие Agile от WF',
-    link: 'https://i.pinimg.com/originals/b1/7e/d3/b17ed34d5f685429db5ec665fb79d2ea.png'
-  },
-  {
-    name: 'Жизнь менеджера',
-    link: 'https://uagolos.com/wp-content/uploads/2021/03/image2.png'
-  },
-  {
-    name: 'Проектный менеджемент это...',
-    link: 'https://alpha.invensislearning.com/storage/images/articles/Info-graphics/project-managers-responsibilities.png'
-  },
-  {
-    name: 'Процесс VS Проект',
-    link: 'https://project.pm/wp-content/uploads/2019/01/Project-Vs-Operations.-1.png'
-  },
-  {
-    name: 'Стейкхолдеры',
-    link: 'https://sun9-20.userapi.com/impg/I-yEt-XCnDWHaYRniPDF552iqC9MjzMNM3S7kQ/SouKYS9xSng.jpg?size=604x410&quality=96&sign=4d03c4b1d862cb4ab0615383f7eca76f&type=album'
-  },
-  {
-    name: 'Фазы проектного менеджемента',
-    link: 'https://webcatcher.ru/wp-content/uploads/2019/08/ris.-2-stadii-upravlenija-proektami.jpg'
-  }
-];
+import initialCards from './initialCards.js';
+import Card from './Card.js';
+import FormValidator from './FormValidator.js';
 
 
 /** Элементы страницы */
@@ -34,7 +10,6 @@ const profileJob = document.querySelector('.profile__job');
 
 const newCardButton = document.querySelector('.profile__button_type_add');
 const cardsContainer = document.querySelector('.cards');
-const cardTemplate = document.querySelector('#card').content;
 
 const profileEditPopup = document.querySelector('.popup_type_edit-profile');
 const profileEditForm = profileEditPopup.querySelector('.popup__form');
@@ -46,91 +21,29 @@ const newCardForm = newCardPopup.querySelector('.popup__form');
 const newCardTitle = newCardPopup.querySelector('.popup__input_type_title');
 const newCardLink = newCardPopup.querySelector('.popup__input_type_link');
 
-const imagePopup = document.querySelector('.popup_type_image');
-const imagePopupFigure = imagePopup.querySelector('.popup__image');
-const imagePopupCaption = imagePopup.querySelector('.popup__image-caption');
+export const imagePopup = document.querySelector('.popup_type_image');
+export const imagePopupFigure = imagePopup.querySelector('.popup__image');
+export const imagePopupCaption = imagePopup.querySelector('.popup__image-caption');
+
 
 const popupCloseButtons = document.querySelectorAll('.popup__cancel-button');
 const popups = document.querySelectorAll('.popup');
 
+const formValidators = {}; // Экземпляры класса FormValidator, чтобы снаружи обращаться к их методам
 
-/** Функция добавляет карточку/карточки на страницу
- *
- * Аргументы:
- * - контейнер для вставки,
- * - один или несколько объектов с карточкой (при вставке массива с объектами использовать spread-оператор, например: ...arrayOfObjects)
- *
- * Ожидаемый формат объекта карточки:
- * {  name: Строка с именем объекта (заголовок карточки),
- *    link: Строка с полным адресом изображения   }
- *
- * Шаблон карточки для генерации:
- * блок <template id="cards">
- */
-function renderCards (container, ...cards) {
-  cards.forEach( card => {
-    container.prepend( getNewCard(card.name, card.link) );
-  });
-}
-
-/** Функция создает из шаблона элемент с новой карточкой и возвращает его */
-function getNewCard(name, link) {
-  // Создание элемента из шаблона
-  const card = cardTemplate.querySelector('.card').cloneNode(true);
-
-  const cardImage = card.querySelector('.card__image');
-  const cardTitle = card.querySelector('.card__title');
-  const likeButton = card.querySelector('.card__like-button');
-  const deleteButton = card.querySelector('.card__delete-button');
-
-  // Заполнение содержимого
-  cardImage.src = link;
-  cardImage.alt = name;
-  cardTitle.textContent = name;
-
-  // Обработчики нажатий
-  cardImage.addEventListener('click', showImagePopup);
-  likeButton.addEventListener('click', likeCard);
-  deleteButton.addEventListener('click', deleteCard);
-
-  return card;
-}
-
-
-/** Функция нажатия на лайк */
-function likeCard (event) {
-  event.target.closest('.card__like-button').classList.toggle('card__like-button_active');
-}
-
-/** Функция удаления карточки при нажатии на кнопку */
-function deleteCard (event) {
-  event.target.closest('.card').remove();
-}
 
 /** Функция открывает нужный попап */
-function openPopup (popup) {
+export function openPopup (popup) {
   popup.classList.add('popup_opened');
   document.addEventListener('keydown', closePopupByKey);
-
-  disableSubmitButton(submitButtonElement, formClasses); 
 }
 
 /** Функция закрывает нужный попап */
-function closePopup(popup) {
+function closePopup (popup) {
   popup.classList.remove('popup_opened');
   document.removeEventListener('keydown', closePopupByKey);
 }
 
-/* Функционал сброса состояния кнопки "Сохранить" при открытии попапа для добавления карточки*/
-newCardButton.addEventListener('click', function () {
-  openPopup(newCardPopup);
-
-  // Сброс значений полей формы
-  newCardForm.reset();
-});
-
-/* Функция сброса состояния кнопки сабмита */
-const submitButtonElement = newCardForm.querySelector('.popup__save-button');
 
 /** Обработчик для закрытия попапов по кнопке Esc */
 function closePopupByKey (evt) {
@@ -140,7 +53,7 @@ function closePopupByKey (evt) {
   }
 }
 
-/** Функция сохраняет введенные данные и закрывает попап */
+/** Функция сохраняет введенные данные (профиль пользователя) и закрывает попап */
 function saveProfileInfo (event) {
   event.preventDefault();
   profileName.textContent = profileNameInput.value;
@@ -148,7 +61,7 @@ function saveProfileInfo (event) {
   closePopup (profileEditPopup);
 }
 
-/** Функция сохраняет введенные данные и закрывает попап */
+/** Функция сохраняет введенные данные (добавление карточки) и закрывает попап */
 function saveNewCard (event) {
   event.preventDefault();
 
@@ -157,18 +70,10 @@ function saveNewCard (event) {
     link: newCardLink.value
   };
 
-  renderCards(cardsContainer, card);
+  renderCard(cardsContainer, card);
   closePopup(newCardPopup);
   newCardForm.reset();
-}
-
-/** Функция открывает попап с увеличенной картинкой */
-function showImagePopup (event) {
-  imagePopupFigure.src = event.target.src;
-  imagePopupFigure.alt = event.target.alt;
-  imagePopupCaption.textContent = event.target.closest('.card').querySelector('.card__title').textContent;
-
-  openPopup(imagePopup);
+  formValidators[newCardForm.name].disableButtonState();
 }
 
 
@@ -199,5 +104,47 @@ popups.forEach( popup => {
 });
 
 
+/** Функция добавляет карточку на страницу
+ *
+ * Аргументы:
+ * - контейнер для вставки,
+ * - объект с карточкой
+ * {  name: Строка с именем объекта (заголовок карточки),
+ *    link: Строка с полным адресом изображения   }
+ *
+ * Шаблон карточки для генерации:
+ * блок <template id="card">
+ */
+function renderCard (container, cardData) {
+  container.prepend(getCardElement(cardData));
+}
+
+/** Функция создает новый элемент карточки по ее содержанию */
+function getCardElement (cardData) {
+  const card = new Card(cardData, '#card');
+  return card.generateCard();
+}
+
 /** Отобразить исходные карточки при загрузке страницы */
-renderCards(cardsContainer, ...initialCards);
+initialCards.forEach(card => renderCard (cardsContainer, card));
+
+
+/** Функция запускает валидацию всех форм на странице */
+function validateForms (formClasses) {
+  const formElements = Array.from(document.querySelectorAll(formClasses.formSelector));
+  formElements.forEach( formElement => {
+    const form = new FormValidator(formClasses, formElement);
+    formValidators[formElement.getAttribute('name')] = form;
+    form.enableValidation();
+  });
+}
+
+/** Запустить валидацию форм на странице */
+validateForms({
+  formSelector: '.popup__form',
+  inputSelector: '.popup__input',
+  submitButtonSelector: '.popup__save-button',
+  inactiveButtonClass: 'popup__save-button_disabled',
+  inputErrorClass: 'popup__input_type_error',
+  errorClass: 'popup__input-error_visible'
+});
