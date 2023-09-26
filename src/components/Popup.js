@@ -4,16 +4,18 @@ export default class Popup {
    *
    * Параметры:
    * popupSelector - селектор попапа
-   *
+   * formElement - форма внутри попапа
    */
-  constructor(popupSelector) {
+  constructor(popupSelector, formElement) {
     this._popup = document.querySelector(popupSelector);
+    this._form = formElement;
     this._handleEscClose = this._handleEscClose.bind(this);
   }
 
   open() {
     this._popup.classList.add('popup_opened');
     document.addEventListener('keydown', this._handleEscClose);
+    this._disableSubmitButton(); // Деактивируйте кнопку сабмита при открытии попапа
   }
 
   close() {
@@ -36,5 +38,13 @@ export default class Popup {
     this._popupCloseButton.addEventListener('click', () => {
       this.close();
     });
+  }
+
+  _disableSubmitButton() {
+    const submitButton = this._form.querySelector('.popup__save-button');
+    if (submitButton) {
+      submitButton.classList.remove('active-class'); // Удаляем класс активной кнопки
+      submitButton.classList.add('popup__save-button_disabled'); // Добавляем класс для дизейбла кнопки
+    }
   }
 }
