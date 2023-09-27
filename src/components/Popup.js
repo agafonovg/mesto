@@ -15,7 +15,11 @@ export default class Popup {
   open() {
     this._popup.classList.add('popup_opened');
     document.addEventListener('keydown', this._handleEscClose);
-    this._disableSubmitButton(); // Деактивируйте кнопку сабмита при открытии попапа
+    
+     // Деактивируем кнопку сабмита при открытии попапа
+     if (this._popup.querySelector('.popup__save-button') && this._popup.querySelector('.popup__type-edit')) {
+      this._disableSubmitButton();
+    }    
   }
 
   close() {
@@ -41,10 +45,8 @@ export default class Popup {
   }
 
   _disableSubmitButton() {
-    const submitButton = this._form.querySelector('.popup__save-button');
-    if (submitButton) {
-      submitButton.classList.remove('active-class'); // Удаляем класс активной кнопки
-      submitButton.classList.add('popup__save-button_disabled'); // Добавляем класс для дизейбла кнопки
-    }
+    //const submitButton = this._popup.querySelector('.popup__save-button');
+    submitButton.classList.remove('active-class'); // Удаляем класс активной кнопки
+    submitButton.classList.add('popup__save-button_disabled'); // Добавляем класс для дизейбла кнопки
   }
 }

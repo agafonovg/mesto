@@ -8,6 +8,7 @@ export default class Card {
    * templateSelector - селектор template-элемента с шаблоном карточки
    * handleCardClick - обработчик нажатия на изображение карточки
    */
+  
   constructor ({name, link}, templateSelector, handleCardClick) {
     this._name = name;
     this._link = link;

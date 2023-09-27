@@ -8,6 +8,7 @@ export default class PopupWithForm extends Popup {
    * popupSelector - селектор элемента с попапом
    * handleSubmit - обработчик отправки формы
    */
+  
   constructor(popupSelector, handleSubmit) {
     super(popupSelector);
     this._handleSubmit = handleSubmit;

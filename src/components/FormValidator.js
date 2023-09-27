@@ -14,6 +14,8 @@ export default class FormValidator {
    * }
    * formElement - элемент с валидируемой формой
    */
+
+  
   constructor (formClasses, formElement) {
     // Форма
     this._formElement = formElement;

@@ -7,6 +7,7 @@ export default class Section {
    * renderer - функция, которая отвечает за создание и отрисовку данных на странице,
    * containerSelector - селектор контейнера, в который нужно добавлять созданные элементы
    */
+  
   constructor({items, renderer}, containerSelector) {
     this._items = items;
     this._renderer = renderer;
