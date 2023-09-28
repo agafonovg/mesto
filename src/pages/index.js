@@ -34,9 +34,9 @@ const formValidators = {};
 function validateForms (formClasses) {
   const formElements = Array.from(document.querySelectorAll(formClasses.formSelector));
   formElements.forEach(formElement => {
-    const form = new FormValidator(formClasses, formElement);
-    formValidators[formElement.getAttribute('name')] = form;
-    form.enableValidation();
+    const formValidator = new FormValidator(formClasses, formElement);
+    formValidators[formElement.getAttribute('name')] = formValidator;
+    formValidator.enableValidation();
   });
 }
 
@@ -63,7 +63,6 @@ const profileEditPopup = new PopupWithForm(profileEditPopupSelector, data => {
 const newCardPopup = new PopupWithForm(newCardPopupSelector, data => {
   cardsSection.addItem(renderCard(data));
   newCardPopup.close();
-  formValidators[newCardForm.getAttribute('name')].disableButtonState();
 });
 
 const imagePopup = new PopupWithImage(imagePopupSelector);
@@ -90,6 +89,7 @@ newCardPopup.setEventListeners();
 
 newCardButton.addEventListener('click', function () {
   newCardPopup.open();
+  formValidators[newCardForm.getAttribute('name')].disableButtonState();
 });
 
 imagePopup.setEventListeners();
