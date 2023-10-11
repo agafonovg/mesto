@@ -23,10 +23,9 @@ export default class Api {
       method: 'GET',
       headers: this._headers,
     })
-    .then(res => {
-      if (res.ok) return res.json();
-      throw new Error(`${res.status} ${res.statusText}. See response.message for more info`);
-    });
+
+    .then(this._checkResponse)
+
   }
 
   /**
@@ -47,10 +46,8 @@ export default class Api {
         about: job
       })
     })
-    .then(res => {
-      if (res.ok) return res.json();
-      throw new Error(`${res.status} ${res.statusText}. See response.message for more info`);
-    });
+
+    .then(this._checkResponse);
   }
 
   /**
@@ -68,10 +65,8 @@ export default class Api {
         avatar: link
       })
     })
-    .then(res => {
-      if (res.ok) return res.json();
-      throw new Error(`${res.status} ${res.statusText}. See response.message for more info`);
-    });
+
+    .then(this._checkResponse);
   }
 
   /**
@@ -85,10 +80,9 @@ export default class Api {
       method: 'GET',
       headers: this._headers,
     })
-    .then(res => {
-      if (res.ok) return res.json();
-      throw new Error(`${res.status} ${res.statusText}. See response.message for more info`);
-    });
+
+    .then(this._checkResponse);
+
   }
 
   /**
@@ -109,10 +103,8 @@ export default class Api {
         link
       })
     })
-    .then(res => {
-      if (res.ok) return res.json();
-      throw new Error(`${res.status} ${res.statusText}. See response.message for more info`);
-    });
+
+    .then(this._checkResponse);
   }
 
   /**
@@ -127,10 +119,9 @@ export default class Api {
       method: 'DELETE',
       headers: this._headers
     })
-    .then(res => {
-      if (res.ok) return Promise.resolve();
-      throw new Error(`${res.status} ${res.statusText}. See response.message for more info`);
-    });
+
+    .then(this._checkResponse);
+
   }
 
   /**
@@ -145,10 +136,9 @@ export default class Api {
       method: 'PUT',
       headers: this._headers
     })
-    .then(res => {
-      if (res.ok) return res.json();
-      throw new Error(`${res.status} ${res.statusText}. See response.message for more info`);
-    })
+
+    .then(this._checkResponse)
+
     .then(res => {
       return res.likes;
     });
@@ -166,13 +156,19 @@ export default class Api {
       method: 'DELETE',
       headers: this._headers
     })
-    .then(res => {
-      if (res.ok) return res.json();
-      throw new Error(`${res.status} ${res.statusText}. See response.message for more info`);
-    })
+
+    .then(this._checkResponse)
+
     .then(res => {
       return res.likes;
     });
+  }
+
+  _checkResponse(res) {
+    if (res.ok) {
+      return res.json();
+    }
+    throw new Error(`${res.status} ${res.statusText}. See response.message for more info`);
   }
 
   /**

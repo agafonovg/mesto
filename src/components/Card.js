@@ -16,13 +16,14 @@ export default class Card {
    * @param {function} handleLikeCard - Функция-обработчик для лайка карточки
    * @param {string} userId - ID текущего пользователя
    */
-  constructor (
-    {name, link, likes, owner, createdAt, _id},
+  constructor(
+    { name, link, likes, owner, createdAt, _id },
     templateSelector,
     handleCardClick,
     handleDeleteCard,
     handleLikeCard,
-    userId) {
+    userId
+  ) {
     this._name = name;
     this._link = link;
     this._likes = likes;
@@ -34,7 +35,7 @@ export default class Card {
 
     this._templateSelector = templateSelector;
     this._handleCardClick = handleCardClick;
-    this._handleDeleteCard = handleDeleteCard;
+    this._handleDeleteCard = handleDeleteCard; // Исправление: добавлена передача обработчика удаления
     this._handleLikeCard = handleLikeCard;
   }
 
@@ -42,12 +43,12 @@ export default class Card {
    * Получает шаблон создаваемой карточки из разметки
    * @returns {object} Пустой элемент, созданный из шаблона
    */
-  _getTemplate () {
+  _getTemplate() {
     const cardTemplate = document
-                      .querySelector(this._templateSelector)
-                      .content
-                      .querySelector('.card')
-                      .cloneNode(true);
+      .querySelector(this._templateSelector)
+      .content
+      .querySelector('.card')
+      .cloneNode(true);
     return cardTemplate;
   }
 
@@ -55,9 +56,10 @@ export default class Card {
    * Создает заполненную по исходным данным карточку
    * @returns {object} Карточка, готовая для вставки в разметку
    */
-  generateCard () {
+   generateCard() {
     this._element = this._getTemplate();
     this._likeButton = this._element.querySelector('.card__like-button');
+    this._likeCount = this._element.querySelector('.card__like-count'); // Перенос в generateCard
 
     // Заполнение содержимого
     const image = this._element.querySelector('.card__image');
@@ -80,7 +82,7 @@ export default class Card {
   /**
    * Устанавливает необходимые слушатели событий на элементы карточки
    */
-  _setEventlisteners () {
+  _setEventlisteners() {
     // Лайк карточки
     this._element.querySelector('.card__like-button').addEventListener('click', () => this._likeCard());
 
@@ -89,15 +91,15 @@ export default class Card {
 
     // Кнопка удаления карточки, при наличии
     if (this._element.querySelector('.card__delete-button')) {
-        this._element.querySelector('.card__delete-button').addEventListener('click', () => this._handleDelete());
-      }
+      this._element.querySelector('.card__delete-button').addEventListener('click', () => this._handleDelete());
+    }
   }
 
   /**
    * Обрабатывает лайк карточки
    */
-  _likeCard () {
-    this._handleLikeCard(this._id, this._isLiked)
+  _likeCard() {
+    this._handleLikeCard(this._id, this._isLiked);
   }
 
   /**
@@ -117,8 +119,8 @@ export default class Card {
   /**
    * Обрабатывает нажатие на удаление карточки
    */
-   _handleDelete () {
-      this._handleDeleteCard(this._id);
+  _handleDelete() {
+    this._handleDeleteCard(this._id);
   }
 
   /**
@@ -126,7 +128,7 @@ export default class Card {
    * @returns {boolean}
    */
   _checkIsLiked() {
-      return this._likes.some(person => person._id === this._userId);
+    return this._likes.some(person => person._id === this._userId);
   }
 
   /**
@@ -137,28 +139,25 @@ export default class Card {
    *
    * @param {Array} likes - Новые лайки карточки (необязательный параметр)
    */
-  setLikes(likes) {
-    const likeCount = this._element.querySelector('.card__like-count');
-    const likeButton = this._element.querySelector('.card__like-button');
-
+   setLikes(likes) {
     if (likes) {
       this._likes = likes;
       this._isLiked = this._checkIsLiked();
     }
 
-    likeCount.textContent = this._likes.length;
+    this._likeCount.textContent = this._likes.length;
 
     if (this._isLiked) {
-      likeButton.classList.add('card__like-button_active');
+      this._likeButton.classList.add('card__like-button_active');
     } else {
-      likeButton.classList.remove('card__like-button_active');
+      this._likeButton.classList.remove('card__like-button_active');
     }
   }
 
   /**
    * Удаляет карточку из раметки
    */
-  delete () {
+  delete() {
     this._element.remove();
     this._element = null;
   }
